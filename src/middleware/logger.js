@@ -1,8 +1,9 @@
 'use strict';
 
-function logger(request, response, next) {
-  console.log(request.method, request.path);
-  next();
-}
+// Middleware for logging request information
+const logger = (req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  next(); // Proceed to the next middleware or route handler
+};
 
 module.exports = logger;

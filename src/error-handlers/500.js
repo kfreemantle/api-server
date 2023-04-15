@@ -1,8 +1,9 @@
 'use strict';
 
-function error500 (error, request, response, next) {
-  console.log(error);
-  response.status(500).send('Undefined Server Error');
-}
+// 500 error handler middleware for unhandled exceptions
+const internalServerErrorHandler = (err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ error: "Internal Server Error" });
+};
 
-module.exports = error500;
+module.exports = internalServerErrorHandler;

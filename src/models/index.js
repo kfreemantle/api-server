@@ -1,10 +1,42 @@
 'use strict';
 
-require('dotenv').config();
+// Load environment variables from the .env file
+require("dotenv").config();
 
-const { Sequelize } = require('sequelize');
-const SQL_URL = process.env.SQL_URL || 'sqlite:memory';  // I don't understand this alt path
-const sequelize = new Sequelize(SQL_URL);
+const { Sequelize } = require("sequelize");
+const FoodModel = require("./food");
+const ClothesModel = require("./clothes");
 
-module.exports = { sequelize };
+// Initialize Sequelize with environment variables
+const sequelize = new Sequelize(
+  process.env.DB_DATABASE,
+  process.env.DB_USERNAME,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DIALECT,
+  }
+);
 
+// Initialize the Food model with the Sequelize instance
+const Food = FoodModel(sequelize);
+
+// Initialize the Clothes model with the Sequelize instance
+const Clothes = ClothesModel(sequelize);
+
+// Test the database connection
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Database connection has been established successfully.");
+  })
+  .catch((error) => {
+    console.error("Unable to connect to the database:", error);
+  });
+
+// Export the Sequelize instance and the initialized models
+module.exports = {
+  sequelize,
+  Food,
+  Clothes,
+};

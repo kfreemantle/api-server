@@ -2,12 +2,11 @@
 
 const { Model, DataTypes } = require("sequelize");
 
-class Food extends Model {}
+class Clothes extends Model {}
 
-const foodModel = (sequelize) => {
-  Food.init(
+const clothesModel = (sequelize) => {
+  Clothes.init(
     {
-      // Defining the fields for the Food model
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -17,18 +16,17 @@ const foodModel = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      type: {
+      size: {
         type: DataTypes.STRING,
         allowNull: false,
       },
     },
     {
-      // Associating the Food model with the sequelize instance
       sequelize,
-      modelName: "Food",
+      modelName: "Clothes",
     }
   );
-  return Food;
+  return Clothes;
 };
 
-module.exports = foodModel;
+module.exports = clothesModel;

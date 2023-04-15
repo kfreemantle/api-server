@@ -1,8 +1,8 @@
 'use strict';
 
-function error404 (error, request, response, next) {
-  console.log(error);
-  response.status(404).send('Not Found error');
-}
+// 404 error handler middleware for unmatched routes
+const notFoundHandler = (req, res, next) => {
+  res.status(404).json({ error: "Not Found" });
+};
 
-module.exports = error404;
+module.exports = notFoundHandler;
