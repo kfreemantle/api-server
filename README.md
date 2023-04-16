@@ -4,7 +4,7 @@ Our objective is to make a barebones server using TDD principles.  I wrote tests
 
 ### UML
 
-![UML](Lab03UML.png)
+![UML](lab03UML.png)
 
 #### Render
 
